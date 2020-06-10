@@ -11,3 +11,6 @@ will make the project available on localhost (port 5000). A browser can then con
 
 # Implementation Note
 The Unicode block for braille (0x2800-0x28ff) is used to specify the braille cells directly. In general, screen readers write the corresponding braille cells directly to the display, without further translation, as desired. In some cases (for example, certain versions of VoiceOver for Mac), it may be necessary to turn off Grade II translation to achieve the desired effect.
+
+# HTML Rendered View
+https://diagram-codesprint.github.io/render-line-charts-braille-display/src/test.html
