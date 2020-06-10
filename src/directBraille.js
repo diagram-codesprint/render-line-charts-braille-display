@@ -19,3 +19,7 @@ export function convertCells(cells) {
         return accumulator + String.fromCharCode(dots);
     }, "");
 }
+
+export function insertBraille(node, dots) {
+    node.innerText = convertCells(dots);
+}
