@@ -8,3 +8,6 @@ A simple test file is in `src/test.html`. At least initially, JavaScript (ES6) m
 npx serve src
 ```
 will make the project available on localhost (port 5000). A browser can then connect to it and access `src/test.html`.
+
+# Implementation Note
+The Unicode block for braille (0x2800-0x28ff) is used to specify the braille cells directly. In general, screen readers write the corresponding braille cells directly to the display, without further translation, as desired. In some cases (for example, certain versions of VoiceOver for Mac), it may be necessary to turn off Grade II translation to achieve the desired effect.
