@@ -4,14 +4,20 @@
     <title>Direct Braille - Simple Test</title>
     <script type="module">
       import * as braille from "./directBraille.js"  ;
-      // Full cell followed by "ab cd".
-      const testCells = [braille.fullCell, [1], [1,2], [], [1,4], [1,4,5]];
-      braille.insertBraille(document.getElementById("braille"), testCells);
+      // Present a single line: full cell followed by "ab cd".
+      const singleLine = [braille.fullCell, [1], [1,2], [], [1,4], [1,4,5]];
+      // Present multiple lines: "abc" on the first line, and "def" on the second.
+      const line1 = [[1], [1,2], [1,4]];
+      const line2 = [[1,4,5], [1,5], [1,2,4]];
+      braille.insertBraille(document.getElementById("single_line"), singleLine);
+      braille.insertBrailleLines(document.getElementById("multiple_lines"), [line1, line2]);
     </script>
   </head>
   <body>
     <h1>Direct Braille - Basic Test</h1>
-    <p>This is a test.</p>
-    <p id="braille"></p>
+    <p>A single line of braille follows.</p>
+    <p id="single_line"></p>
+    <p>Multiple lines of braille follow.</p>
+    <div id="multiple_lines"></div>
   </body>
 </html>

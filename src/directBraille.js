@@ -20,6 +20,20 @@ export function convertCells(cells) {
     }, "");
 }
 
+// These functions insert braille into a document.
+
 export function insertBraille(node, dots) {
     node.innerText = convertCells(dots);
+}
+
+export function insertBrailleLines(node, lines) {
+    if (!lines.length)
+	return;
+    let brailleLines = "";
+    for (let i = 0; i < lines.length; ++i) {
+	brailleLines += convertCells(lines[i]);
+	if (i < lines.length - 1)
+	    brailleLines += "\n";
+    }
+    node.innerHTML = `<pre>${brailleLines}</pre>`;
 }
