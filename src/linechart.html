@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+  <head>
+    <title>Direct Braille - Simple Test</title>
+    <script type="module">
+      import * as braille from "./directBraille.js"  ;
+      // linechart
+      const linechart = [[7,6], [2,4], [2,6], [3,6], [7,8], [7,8], [2,4], [7,4], [1,1], [1,5], [3,8], [3,4], [2,5], [3,5], [2,5], [1,4], [7]];
+      braille.insertBraille(document.getElementById("linechart"), linechart);
+
+      // areachart
+      const areachart = [[7,6], [2,4], [2,6], [3,6], [7,8], [7,8], [2,4], [7,4], [1,1], [1,5], [3,8], [3,4], [2,5], [3,5], [2,5], [1,4], [7]];
+      braille.insertBraille(document.getElementById("areachart"), areachart);
+    </script>
+  </head>
+  <body>
+    <h1>Direct Braille - Basic Test</h1>
+    <p>Simple linechart of braille follows.</p>
+    <label for="linechart">simple line chart:</label>
+    <p id="linechart"></p>
+
+    <label for="areachart">area chart:</label>
+    <p id="areachart"></p>
+  </body>
+</html>
