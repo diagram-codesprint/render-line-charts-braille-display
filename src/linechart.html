@@ -1,15 +1,28 @@
 <!doctype html>
 <html>
   <head>
-    <title>Direct Braille - Simple Test</title>
+    <title>Line Chart - Manual Test</title>
+
+    <style media="screen">
+      body {
+        font-size: 25px;
+      }
+
+      output, label {
+        display: block;
+        font-weight: bold;
+        margin-top: 1rem;
+      }
+    </style>
+
     <script type="module">
       import * as braille from "./directBraille.js"  ;
       // linechart
-      const linechart = [[7,6], [2,4], [2,6], [3,6], [7,8], [7,8], [2,4], [7,4], [1,1], [1,5], [3,8], [3,4], [2,5], [3,5], [2,5], [1,4], [7]];
+      const linechart = [[7,6], [2,4], [2,6], [3,6], [7,8], [7,8], [2,4], [7,4], [1,4], [1,5], [3,8], [3,4], [2,5], [3,5], [2,5], [1,4], [7]];
       braille.insertBraille(document.getElementById("linechart"), linechart);
 
       // areachart
-      const areachart = [[7,6], [2,4], [2,6], [3,6], [7,8], [7,8], [2,4], [7,4], [1,1], [1,5], [3,8], [3,4], [2,5], [3,5], [2,5], [1,4], [7]];
+      const areachart = [[7,6,8], [2,3,7,4,5,6,8], [2,3,7,6,8], [3,7,6,8], [7,8], [7,8], [2,3,7,4,5,6,8], [7,4,5,6,8], [1,2,3,4,7,4,5,6,8], [1,2,3,4,7,5,6,8], [3,7,8], [3,7,4,5,6,8], [2,3,7,5,6,8], [3,7,5,6,8], [2,3,7,5,6,8], [1,2,3,7,4,5,6,8], [7]];
       braille.insertBraille(document.getElementById("areachart"), areachart);
     </script>
   </head>
