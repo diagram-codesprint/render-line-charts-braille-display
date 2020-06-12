@@ -13,16 +13,6 @@ npx serve src
 ```
 will make the project available on localhost (port 5000). A browser can then connect to it and access `src/test.html`.
 
-# Implementation Note
-The Unicode block for braille (0x2800-0x28ff) is used to specify the braille cells directly. In general, screen readers write the corresponding braille cells directly to the display, without further translation, as desired. In some cases (for example, certain versions of VoiceOver for Mac), it may be necessary to turn off Grade II translation to achieve the desired effect.
-
-Within the Unicode range (0x2800-0x28ff), if a bit is set, the corresponding braille dot is raised on the display, and shown visually in a braille font. Thus, 0x2800 is a space (blank cell) with no dots raised. The least significant bit (bit position 0) represents braille dot 1. The next bit (moving from right to left in the binary representation) represents braille dot 2, and so on. Bit 7 represents braille dot 8.
-
-Consequently, for example, to represent a braille cell consisting of dots 1, 2 and 3, the low-order byte is 00000111 in binary (i.e., 7 in decimal).
-
-Note that for historical reasons, braille is composed of a six-dot cell, wherein the dots are conventionally numbered 1, 2 and 3 in the left column, and 4, 5 and 6 in the right column. In an eight-dot cell, two additional dot positions are added below the conventional six-dot arrangement: dot 7 is on the lower left, and dot 8 on the lower right. Most braille displays provide eight-dot cells.
-
-
 ## User Experience
 
 BLC converts a sequence of numeric values into a sequence of Braille characters that forms a quick sketch of the shape of the data. In particular, by scanning the Braille, one can tell where large and small values occur in the data, or where sudden changes occur.
@@ -36,6 +26,18 @@ In __area chart__ mode, each column is filled in below the top dot, so that (for
 ## Test Page
 
 The [Test Page](https://diagram-codesprint.github.io/render-line-charts-braille-display/src/index.html) allows the user to display random data. The user can specify the number of values to display. In addition to the Braille output, the page shows how the Braille display is generated, by determining the range of values, and placing the values into four bins, corresponding to the four vertical dot positions.
+
+
+# Implementation Note
+The Unicode block for braille (0x2800-0x28ff) is used to specify the braille cells directly. In general, screen readers write the corresponding braille cells directly to the display, without further translation, as desired. In some cases (for example, certain versions of VoiceOver for Mac), it may be necessary to turn off Grade II translation to achieve the desired effect.
+
+Within the Unicode range (0x2800-0x28ff), if a bit is set, the corresponding braille dot is raised on the display, and shown visually in a braille font. Thus, 0x2800 is a space (blank cell) with no dots raised. The least significant bit (bit position 0) represents braille dot 1. The next bit (moving from right to left in the binary representation) represents braille dot 2, and so on. Bit 7 represents braille dot 8.
+
+Consequently, for example, to represent a braille cell consisting of dots 1, 2 and 3, the low-order byte is 00000111 in binary (i.e., 7 in decimal).
+
+Note that for historical reasons, braille is composed of a six-dot cell, wherein the dots are conventionally numbered 1, 2 and 3 in the left column, and 4, 5 and 6 in the right column. In an eight-dot cell, two additional dot positions are added below the conventional six-dot arrangement: dot 7 is on the lower left, and dot 8 on the lower right. Most braille displays provide eight-dot cells.
+
+
 
 ## [future] Loading data into BLC
 
