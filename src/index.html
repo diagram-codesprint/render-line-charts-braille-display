@@ -27,6 +27,7 @@
 
     main {
       font-size: 50px;
+      margin-top: 1rem;
     }
 
     h1, h2 {
@@ -52,6 +53,22 @@
 
     #chart1 svg {
       height: 146px;
+    }
+
+
+    table {
+      font-size: 15px;
+      border-collapse: collapse;
+    }
+
+    th, td {
+      padding: 0.25rem;
+      text-align: left;
+      border: 1px solid  hsl(0, 0%, 60%);
+    }
+
+    th {
+      text-align: center;
     }
 
     /*  SVG styles */
@@ -106,11 +123,14 @@
 <body>
   <h1>Braille Line Chart - Basic Test</h1>
   <label>record count: <input type="number" id="record_count_input" value="25" min="2" max="120"></label>
-  <label>area / bar chart: <input type="checkbox" id="area-checkbox"></label>
+  <label>area chart on: <input type="checkbox" id="area-checkbox"></label>
   <button id="data_params_submit">generate chart</button>
 
 
   <main>
+    <h2 id="data-table-section">data table</h2>
+    <section id="data-table"></section>
+
     <h2 id="tall-chart">tall SVG chart</h2>
     <section id="chart1"></section>
 
@@ -135,6 +155,7 @@
 
   <script type="module">
     import * as braille from "./directBraille.js";
+    import * as table from "./table_generator.js";
 
     document.getElementById(`data_params_submit`).addEventListener(`click`, generate_linechart);
 
@@ -144,6 +165,8 @@
       let is_area_chart =  document.getElementById(`area-checkbox`).checked;
 
       let dataset = genData(1, record_count, false);
+
+      table.create_table( dataset, document.querySelector('section#data-table') );
 
       // console.log(dataset);
       //Create new chart and place it on chart section.

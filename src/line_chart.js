@@ -121,6 +121,7 @@ class LineChart {
       let tick_label = document.createElementNS(this.svgns, `text`);
       tick_label.setAttribute(`x`, this.dataspace.x + (x_tick_distance * t) );
       tick_label.setAttribute(`y`, this.dataspace.y + this.dataspace.height + this.ticklength + this.font_size);
+      tick_label.setAttribute(`aria-hidden`, `true`);
       tick_label.classList.add(`tick_label`);
       tick_label.textContent = this.record_labels[t];
       tick.appendChild(tick_label);
@@ -155,6 +156,7 @@ class LineChart {
       let tick_label = document.createElementNS(this.svgns, `text`);
       tick_label.setAttribute(`x`, (this.dataspace.x - this.ticklength) - (this.font_size/4) );
       tick_label.setAttribute(`y`, (this.dataspace.y + this.dataspace.height) - (y_tick_distance * t) + (this.font_size * 0.3));
+      tick_label.setAttribute(`aria-hidden`, `true`);
       tick_label.classList.add(`tick_label`);
       tick_label.textContent = y_tick_values[t];
       tick.appendChild(tick_label);
