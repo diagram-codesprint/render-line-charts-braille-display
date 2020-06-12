@@ -4,15 +4,42 @@
   <title>Braille Line Chart - Simple Test</title>
 
   <style type="text/css">
-    #braille_linechart {
+    #braille_linechart,
+    #braille_linechart-input {
       font-size: 50px;
       font-weight: bold;
-      margin-left: 1rem;
+      margin-left: 30px;
+      width: 100%
+      /* border: none; */
     }
 
+    main {
+      font-size: 50px;
+    }
+
+    h1, h2 {
+      font-family: Verdana, sans-serif;
+      font-weight: normal;
+    }
+
+    h2 {
+      font-size: 15px;
+      margin: 0;
+      padding: 0;
+      display: none;
+    }
+
+    p {
+      margin-top: 0;
+    }
 
     svg {
-      width: 30%;
+      /* width: 440px; */
+      height: 73px;
+    }
+
+    #chart1 svg {
+      height: 146px;
     }
 
     /*  SVG styles */
@@ -53,34 +80,43 @@
       .dataline path {
         fill: none;
         stroke: currentColor;
-        stroke-width: 3px;
+        stroke-width: 2px;
         stroke-linecap: round;
       }
 
       /* colors for each line */
       .dataline.series_0 {
-        color: hsl(0, 0%, 20%);
+        color: hsl(0, 0%, 60%);
       }
 
 	</style>
 </head>
 <body>
   <h1>Braille Line Chart - Basic Test</h1>
+  <label>record count: <input type="number" id="record_count_input" value="25"></label>
   <button id="data_params_submit">Generate Data</button>
+  <main>
+    <h2 id="tall-chart">tall SVG chart</h2>
+    <section id="chart1"></section>
 
-  <section id="chart"></section>
-  <section id="chart2"></section>
-  <p id="braille_linechart"></p>
+    <h2 id="short-chart">short SVG chart</h2>
+    <section id="chart2"></section>
+
+    <h2 id="binned-chart">binned / normalized SVG chart</h2>
+    <section id="chart3"></section>
+
+    <h2 id="braille-chart">braille chart, in paragraph</h2>
+    <p id="braille_linechart"></p>
+
+    <h2 id="braille-chart-textbox">braille chart, in input textbox</h2>
+    <input id="braille_linechart-input" readonly>
+  </main>
 
 
-
-  	<script src="line_chart.js"></script>
-    <script src="data_generator.js"></script>
-    <script src="data_binner.js"></script>
-    <script src="bins2braille.js"></script>
-
-    <script type="text/javascript">
-    </script>
+	<script src="line_chart.js"></script>
+  <script src="data_generator.js"></script>
+  <script src="data_binner.js"></script>
+  <script src="bins2braille.js"></script>
 
   <script type="module">
     import * as braille from "./directBraille.js"  ;
@@ -88,22 +124,29 @@
     document.getElementById(`data_params_submit`).addEventListener(`click`, generate_linechart);
 
     function generate_linechart () {
-      let dataset = genData(1, 20, false);
+      let record_count = document.getElementById(`record_count_input`).value;
+      let chart_width = (record_count * 25) + 55;
+      // 430px
 
-      console.log(dataset);
+      let dataset = genData(1, record_count, false);
+
+      // console.log(dataset);
       //Create new chart and place it on chart section.
-      let chart = new LineChart(dataset, document.querySelector('section#chart'), 600, 160, true);
+      let chart1 = new LineChart(dataset, document.querySelector('section#chart1'), chart_width, 200, true);
+
+      //Create new chart and place it on chart section.
+      let chart2 = new LineChart(dataset, document.querySelector('section#chart2'), chart_width, 100, true);
 
       let normalized_data = new DataBinner(dataset, 4);
       // console.log(normalized_data);
-      let chart2 = new LineChart(normalized_data.dataset, document.querySelector('section#chart2'), 600, 160, false);
+      let chart3 = new LineChart(normalized_data.dataset, document.querySelector('section#chart3'), chart_width, 100, false);
 
       let braille_array = new bins2braille(normalized_data.dataset);
-      console.log(braille_array.cell_array);
+      // console.log(braille_array.cell_array);
 
       // Present a single line: full cell followed by "ab cd".
       braille.insertBraille(document.getElementById("braille_linechart"), braille_array.cell_array);
-
+      document.getElementById(`braille_linechart-input`).value = braille.convertCells(braille_array.cell_array);
     }
 
 

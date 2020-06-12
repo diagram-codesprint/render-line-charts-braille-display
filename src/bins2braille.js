@@ -7,7 +7,7 @@ class bins2braille {
   }
 
   init () {
-    console.log(this.data);
+    // console.log(this.data);
     this.build_glyphs();
   }
 
@@ -22,10 +22,12 @@ class bins2braille {
           // switch column on every odd number
           if (0 === r % 2) {
             glyph[0] = this.cell_dots[0][3 - val];
-            console.log(this.cell_dots[0][3 - val]);
+            // console.log(this.cell_dots[0][3 - val]);
           } else {
             glyph[1] = this.cell_dots[1][3 - val];
-            console.log(this.cell_dots[1][3 - val]);
+            // console.log(this.cell_dots[1][3 - val]);
+
+            // reset new glyph
             this.cell_array.push(glyph);
             glyph = [];
           }
