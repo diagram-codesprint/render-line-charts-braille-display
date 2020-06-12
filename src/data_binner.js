@@ -52,7 +52,7 @@ class DataBinner {
   }
 
   find_interval() {
-    const range = this.max - this.min;
+      const range = Math.abs(this.max - this.min);
     this.interval = range / this.bin_count;
     // console.log(this.min, this.max, this.interval);
   }
@@ -71,17 +71,7 @@ class DataBinner {
         let row = this.dataset[series];
         for (var r = 0, r_len = row.length; r_len > r; ++r) {
           let val = row[r];
-          let bin_val = 0;
-          if (this.bin_slots[1] > val) {
-             bin_val = 0;
-          } else if (this.bin_slots[2] > val) {
-             bin_val = 1;
-          } else if (this.bin_slots[3] > val) {
-             bin_val = 2;
-          } else {
-             bin_val = 3;
-          }
-          row[r] = bin_val;
+            row[r] = Math.floor(Math.abs(this.max - this.min)/val);
         }
       }
     }
