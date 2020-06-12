@@ -11,6 +11,7 @@
       const line2 = [[1,4,5], [1,5], [1,2,4]];
       braille.insertBraille(document.getElementById("single_line"), singleLine);
       braille.insertBrailleLines(document.getElementById("multiple_lines"), [line1, line2]);
+      braille.insertInteractiveBrailleRegion(document.body, [line1, line2]);
     </script>
   </head>
   <body>
@@ -19,5 +20,6 @@
     <p id="single_line"></p>
     <p>Multiple lines of braille follow.</p>
     <div id="multiple_lines"></div>
+    <p> An interactive braille region follows (with the same content as the preceding example).</p>
   </body>
 </html>
