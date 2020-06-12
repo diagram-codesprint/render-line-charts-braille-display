@@ -1,6 +1,7 @@
 class bins2braille {
-  constructor(data) {
+  constructor(data, is_area) {
     this.data = data;
+    this.is_area = is_area || false;
     this.cell_dots =[ [1,2,3,7], [4,5,6,8] ];
     this.cell_array = [];
     this.init()
@@ -20,13 +21,19 @@ class bins2braille {
           let val = row[r];
 
           // switch column on every odd number
-          if (0 === r % 2) {
-            glyph[0] = this.cell_dots[0][3 - val];
-            // console.log(this.cell_dots[0][3 - val]);
-          } else {
-            glyph[1] = this.cell_dots[1][3 - val];
-            // console.log(this.cell_dots[1][3 - val]);
+          let col = 0;
+          if (0 !== r % 2) {
+            col = 1;
+          }
 
+          glyph.push( this.cell_dots[col][3 - val] );
+          if (this.is_area) {
+            for (var v = val; 0 <= v; --v) {
+              glyph.push( this.cell_dots[col][3 - v] );
+            }
+          }
+
+          if (1 === col) {
             // reset new glyph
             this.cell_array.push(glyph);
             glyph = [];

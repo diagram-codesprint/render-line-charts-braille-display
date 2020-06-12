@@ -126,7 +126,7 @@
     function generate_linechart () {
       let record_count = document.getElementById(`record_count_input`).value;
       let chart_width = (record_count * 25) + 55;
-      // 430px
+      let is_area_chart = false;
 
       let dataset = genData(1, record_count, false);
 
@@ -141,15 +141,13 @@
       // console.log(normalized_data);
       let chart3 = new LineChart(normalized_data.dataset, document.querySelector('section#chart3'), chart_width, 100, false);
 
-      let braille_array = new bins2braille(normalized_data.dataset);
+      let braille_array = new bins2braille(normalized_data.dataset, is_area_chart);
       // console.log(braille_array.cell_array);
 
       // Present a single line: full cell followed by "ab cd".
       braille.insertBraille(document.getElementById("braille_linechart"), braille_array.cell_array);
       document.getElementById(`braille_linechart-input`).value = braille.convertCells(braille_array.cell_array);
     }
-
-
 
   </script>
 </body>
