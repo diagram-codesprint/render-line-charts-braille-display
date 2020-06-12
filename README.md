@@ -1,6 +1,10 @@
-# render-line-charts-braille-display
-# Purpose
+# Documentation for Braille Line Chart (BLC)
+
+# Goal
 The aim of the project is to explore the viability of representing the gist of a line chart (i.e., a summary of its "form") on a typical refreshable braille display (e.g., one line of 40 cells). Extension to larger (including multi-line) displays could be explored subsequently.
+
+# HTML Rendered View
+https://diagram-codesprint.github.io/render-line-charts-braille-display/src/test.html
 
 # Testing
 A simple test file is in `src/test.html`. At least initially, JavaScript (ES6) modules are used. Hence, the test cannot be run from the local file system due to cross-domain security issues. It can however be run from a local Web server. For example, with node.js installed, and with the root directory of the project as the current directory:
@@ -18,5 +22,29 @@ Consequently, for example, to represent a braille cell consisting of dots 1, 2 a
 
 Note that for historical reasons, braille is composed of a six-dot cell, wherein the dots are conventionally numbered 1, 2 and 3 in the left column, and 4, 5 and 6 in the right column. In an eight-dot cell, two additional dot positions are added below the conventional six-dot arrangement: dot 7 is on the lower left, and dot 8 on the lower right. Most braille displays provide eight-dot cells.
 
-# HTML Rendered View
-https://diagram-codesprint.github.io/render-line-charts-braille-display/src/test.html
+
+## User Experience
+
+BLC converts a sequence of numeric values into a sequence of Braille characters that forms a quick sketch of the shape of the data. In particular, by scanning the Braille, one can tell where large and small values occur in the data, or where sudden changes occur.
+
+BLC offers two modes of display, toggled with a check box.
+
+In the __default mode__, the Braille characters are chosen so that only one dot occurs in each vertical column of the display. Dots in the top position indicate large values, those in the next lower position are smaller, and so on, with the lowest dot indicating the lowest range of values.
+
+In __area chart__ mode, each column is filled in below the top dot, so that (for example) a value in the lowest range has only the lowest dot, values in the next higher range have the bottom two dots, and so on, with the highest values having all four dots.
+
+## Test Page
+
+The [Test Page](https://diagram-codesprint.github.io/render-line-charts-braille-display/src/index.html) allows the user to display random data. The user can specify the number of values to display. In addition to the Braille output, the page shows how the Braille display is generated, by determining the range of values, and placing the values into four bins, corresponding to the four vertical dot positions.
+
+## [future] Loading data into BLC
+
+For real use, BLC will offer a file upload, allowing the user to bring data from a `csv` file. This is a common data interchange format, that will allow users to import and display values from a spreadsheet, for example
+
+## [future] Scroll vs compress
+
+Braille displays vary in size quite a bit, from 15 cells (30 columns) to 60 cells (120 columns). A future control will allow the user to specify how many cells their display has, and to choose whether they want all data to be compressed horizontally to fit their display size, or whether they prefer to scroll the data through their display.
+
+## [future] Resuable components
+
+In future work, we plan to make some software components of BLC available separately, so that they can be used to render other kinds of information in Braille cells.
