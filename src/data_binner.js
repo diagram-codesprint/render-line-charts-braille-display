@@ -71,7 +71,7 @@ class DataBinner {
         let row = this.dataset[series];
         for (var r = 0, r_len = row.length; r_len > r; ++r) {
           let val = row[r];
-            row[r] = Math.floor(Math.abs(val-this.min)/((this.max-this.min)/this.bin_count));
+            row[r] = Math.floor(Math.abs(val-this.min)/this.interval);
         }
       }
     }
