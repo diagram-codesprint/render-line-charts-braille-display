@@ -93,7 +93,7 @@
 </head>
 <body>
   <h1>Braille Line Chart - Basic Test</h1>
-  <label>record count: <input type="number" id="record_count_input" value="25"></label>
+  <label>record count: <input type="number" id="record_count_input" value="25" min="2"></label>
   <button id="data_params_submit">Generate Data</button>
   <main>
     <h2 id="tall-chart">tall SVG chart</h2>
@@ -125,7 +125,7 @@
 
     function generate_linechart () {
       let record_count = document.getElementById(`record_count_input`).value;
-      let chart_width = (record_count * 25) + 55;
+      let chart_width = Math.max( 220, (record_count * 25) + 55);
       let is_area_chart = false;
 
       let dataset = genData(1, record_count, false);

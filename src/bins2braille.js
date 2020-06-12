@@ -33,7 +33,7 @@ class bins2braille {
             }
           }
 
-          if (1 === col) {
+          if (1 === col || (r_len === r + 1)) {
             // reset new glyph
             this.cell_array.push(glyph);
             glyph = [];
