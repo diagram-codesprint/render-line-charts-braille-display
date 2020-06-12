@@ -17,6 +17,14 @@
       width: 2.5rem;
     }
 
+    button {
+      border: thin solid hsl(0, 0%, 80%);;
+    }
+
+    label {
+      margin-right: 1.5rem;
+    }
+
     main {
       font-size: 50px;
     }
@@ -98,7 +106,10 @@
 <body>
   <h1>Braille Line Chart - Basic Test</h1>
   <label>record count: <input type="number" id="record_count_input" value="25" min="2" max="120"></label>
-  <button id="data_params_submit">Generate Data</button>
+  <label>area / bar chart: <input type="checkbox" id="area-checkbox"></label>
+  <button id="data_params_submit">generate chart</button>
+
+
   <main>
     <h2 id="tall-chart">tall SVG chart</h2>
     <section id="chart1"></section>
@@ -130,7 +141,7 @@
     function generate_linechart () {
       let record_count = document.getElementById(`record_count_input`).value;
       let chart_width = Math.max( 220, (record_count * 25) + 55);
-      let is_area_chart = false;
+      let is_area_chart =  document.getElementById(`area-checkbox`).checked;
 
       let dataset = genData(1, record_count, false);
 
