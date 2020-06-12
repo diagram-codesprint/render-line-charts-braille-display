@@ -9,8 +9,12 @@
       font-size: 50px;
       font-weight: bold;
       margin-left: 30px;
-      width: 100%
+      width: 100%;
       /* border: none; */
+    }
+
+    #record_count_input {
+      width: 2.5rem;
     }
 
     main {
@@ -93,7 +97,7 @@
 </head>
 <body>
   <h1>Braille Line Chart - Basic Test</h1>
-  <label>record count: <input type="number" id="record_count_input" value="25" min="2"></label>
+  <label>record count: <input type="number" id="record_count_input" value="25" min="2" max="120"></label>
   <button id="data_params_submit">Generate Data</button>
   <main>
     <h2 id="tall-chart">tall SVG chart</h2>
@@ -119,7 +123,7 @@
   <script src="bins2braille.js"></script>
 
   <script type="module">
-    import * as braille from "./directBraille.js"  ;
+    import * as braille from "./directBraille.js";
 
     document.getElementById(`data_params_submit`).addEventListener(`click`, generate_linechart);
 
