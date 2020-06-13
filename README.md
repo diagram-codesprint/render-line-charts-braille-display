@@ -1,7 +1,11 @@
-# Documentation for Braille Line Chart (BLC)
+# Documentation for SparkBraille
 
 # Goal
-The aim of the project is to explore the viability of representing the gist of a line chart (i.e., a summary of its "form") on a typical refreshable braille display (e.g., one line of 40 cells). Extension to larger (including multi-line) displays could be explored subsequently.
+The aim of the project is to represent the gist of a line chart (i.e., a summary of its form) on a typical refreshable braille display (e.g., one line of 40 cells), with Web content.
+
+Each pair (tuple) of dots in a sequence can be selected via its Cursor Routing button to read out the values for that tuple.
+
+Extension to larger (including multi-line) displays could be explored subsequently.
 
 # HTML Rendered View
 https://diagram-codesprint.github.io/render-line-charts-braille-display/src/test.html
@@ -15,17 +19,19 @@ will make the project available on localhost (port 5000). A browser can then con
 
 ## User Experience
 
-BLC converts a sequence of numeric values into a sequence of Braille characters that forms a quick sketch of the shape of the data. In particular, by scanning the Braille, one can tell where large and small values occur in the data, or where sudden changes occur.
+SprarkBraille converts a sequence of numeric values into a sequence of braille characters that forms a quick sketch of the shape of the data. In particular, by scanning the braille output, one can tell where large and small values occur in the data, or where sudden changes occur.
 
-BLC offers two modes of display, toggled with a check box.
+To explore the data values for any pair of values in a cell, the user can press the Cursor Routing button for that cell to read out those two values.
 
-In the __default mode__, the Braille characters are chosen so that only one dot occurs in each vertical column of the display. Dots in the top position indicate large values, those in the next lower position are smaller, and so on, with the lowest dot indicating the lowest range of values.
+SprarkBraille offers two modes of display, toggled with a check box.
+
+In the __default mode__, the braille characters are chosen so that only one dot occurs in each vertical column of the display. Dots in the top position indicate large values, those in the next lower position are smaller, and so on, with the lowest dot indicating the lowest range of values.
 
 In __area chart__ mode, each column is filled in below the top dot, so that (for example) a value in the lowest range has only the lowest dot, values in the next higher range have the bottom two dots, and so on, with the highest values having all four dots.
 
 ## Test Page
 
-The [Test Page](https://diagram-codesprint.github.io/render-line-charts-braille-display/src/index.html) allows the user to display random data. The user can specify the number of values to display. In addition to the Braille output, the page shows how the Braille display is generated, by determining the range of values, and placing the values into four bins, corresponding to the four vertical dot positions.
+The [Test Page](https://fizzstudio.github.io/sparkbraille/src/index.html) allows the user to display random data. The user can specify the number of values to display. In addition to the braille output, the page shows how the braille display is generated, by determining the range of values, and placing the values into four bins, corresponding to the four vertical dot positions.
 
 
 # Implementation Note
@@ -39,9 +45,9 @@ Note that for historical reasons, braille is composed of a six-dot cell, wherein
 
 
 
-## [future] Loading data into BLC
+## [future] Loading data into SparkBraille
 
-For real use, BLC will offer a file upload, allowing the user to bring data from a `csv` file. This is a common data interchange format, that will allow users to import and display values from a spreadsheet, for example
+For real use, SparkBraille will offer a file upload, allowing the user to bring data from a `csv` file. This is a common data interchange format, that will allow users to import and display values from a spreadsheet, for example.
 
 ## [future] Scroll vs compress
 
@@ -49,4 +55,4 @@ Braille displays vary in size quite a bit, from 15 cells (30 columns) to 60 cell
 
 ## [future] Resuable components
 
-In future work, we plan to make some software components of BLC available separately, so that they can be used to render other kinds of information in Braille cells.
+In future work, we plan to make some software components of SparkBraille available separately, so that they can be used to render other kinds of information in braille cells.
