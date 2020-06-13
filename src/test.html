@@ -1,28 +1,40 @@
 <!doctype html>
 <html>
-  <head>
-    <title>Direct Braille - Simple Test</title>
-    <script type="module">
-      import * as braille from "./directBraille.js"  ;
-      // Present a single line: full cell followed by "ab cd".
-      const singleLine = [braille.fullCell, [1], [1,2], [], [1,4], [1,4,5]];
-      // Present multiple lines: "abc" on the first line, and "def" on the second.
-      const line1 = [[1], [1,2], [1,4]];
-      const line2 = [[1,4,5], [1,5], [1,2,4]];
-      braille.insertBraille(document.getElementById("single_line"), singleLine);
-      braille.insertBrailleLines(document.getElementById("multiple_lines"), [line1, line2]);
-      braille.insertInteractiveBrailleRegion(document.body, [line1, line2], (node, offset, textAtCursor) => {
-	  console.log(offset);
-	  console.log(textAtCursor);
-      });
-    </script>
-  </head>
-  <body>
-    <h1>Direct Braille - Basic Test</h1>
-    <p>A single line of braille follows.</p>
-    <p id="single_line"></p>
-    <p>Multiple lines of braille follow.</p>
-    <div id="multiple_lines"></div>
-    <p> An interactive braille region follows (with the same content as the preceding example).</p>
-  </body>
+<head>
+  <title>Direct Braille - Simple Test</title>
+  <style>
+    [role=textbox] {
+      font-size: 35px;
+    }
+  </style>
+  <script type="module">
+    import * as braille from "./directBraille.js"  ;
+    // Present a single line: full cell followed by "ab cd".
+    const singleLine = [braille.fullCell, [1], [1,2], [], [1,4], [1,4,5]];
+    // Present multiple lines: "abc" on the first line, and "def" on the second.
+    const line1 = [[1], [1,2], [1,4]];
+    const line2 = [[1,4,5], [1,5], [1,2,4]];
+    braille.insertBraille(document.getElementById("single_line"), singleLine);
+    braille.insertBrailleLines(document.getElementById("multiple_lines"), [line1, line2]);
+    braille.insertInteractiveBrailleRegion(document.body, [line1, line2], (node, selection) => {
+      console.log(node);
+      console.log(selection);
+      
+      let anchor_text = selection.anchorNode.data;
+      let offset = selection.anchorOffset;
+      let char = anchor_text.charAt(offset);
+      console.log(offset);
+      console.log(char);
+    });
+
+  </script>
+</head>
+<body>
+  <h1>Direct Braille - Basic Test</h1>
+  <p>A single line of braille follows.</p>
+  <p id="single_line"></p>
+  <p>Multiple lines of braille follow.</p>
+  <div id="multiple_lines"></div>
+  <p> An interactive braille region follows (with the same content as the preceding example).</p>
+</body>
 </html>
