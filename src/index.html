@@ -30,10 +30,6 @@
       margin-top: 1rem;
     }
 
-    #data_tuple_label {
-      font-size: 20px;
-    }
-
     h1, h2 {
       font-family: Verdana, sans-serif;
       font-weight: normal;
@@ -144,10 +140,11 @@
     <h2 id="binned-chart">binned / normalized SVG chart</h2>
     <section id="chart3"></section>
 
-    <h2 id="braille-chart">braille chart</h2>
-    <section id="braille_linechart"></section>
+    <h2 id="braille-chart">braille chart, in paragraph</h2>
+    <p id="braille_linechart"></p>
 
-    <label id="data_tuple_label">braille data selection: <output id="data_tuple_output" aria-live="assertive"></output> </label>
+    <h2 id="braille-chart-textbox">braille chart, in input textbox</h2>
+    <input id="braille_linechart-input" readonly>
   </main>
 
 
@@ -155,7 +152,6 @@
   <script src="data_generator.js"></script>
   <script src="data_binner.js"></script>
   <script src="bins2braille.js"></script>
-  <script src="data_lookup.js"></script>
 
   <script type="module">
     import * as braille from "./directBraille.js";
@@ -180,24 +176,15 @@
       let chart2 = new LineChart(dataset, document.querySelector('section#chart2'), chart_width, 100, true);
 
       let normalized_data = new DataBinner(dataset, 4);
-
       // console.log(normalized_data);
       let chart3 = new LineChart(normalized_data.dataset, document.querySelector('section#chart3'), chart_width, 100, false);
 
       let braille_array = new bins2braille(normalized_data.dataset, is_area_chart);
       // console.log(braille_array.cell_array);
 
-      // insert interactive braille chart
-      braille.insertInteractiveBrailleRegion(document.getElementById(`braille_linechart`), [braille_array.cell_array], (offset, node, selection) => {
-        // console.log(offset);
-        const data_index = offset * 2;
-        // get data at index from original dataset
-        const data_tuple = new DataLookup(dataset, data_index).tuple;
-
-        // console.log(data_tuple);
-        document.getElementById(`data_tuple_output`).textContent = data_tuple.toString().replace(`,`, `, `);
-      });
-
+      // Present a single line: full cell followed by "ab cd".
+      braille.insertBraille(document.getElementById("braille_linechart"), braille_array.cell_array);
+      document.getElementById(`braille_linechart-input`).value = braille.convertCells(braille_array.cell_array);
     }
 
   </script>

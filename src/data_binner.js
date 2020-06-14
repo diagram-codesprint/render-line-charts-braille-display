@@ -65,10 +65,7 @@ class DataBinner {
   }
 
   normalize_data() {
-    // make static clone of dataset
-    this.dataset = JSON.parse(JSON.stringify( this.data ));
-
-    // assign new dataset entries to bins
+    this.dataset = Object.assign(this.data);
     for (const series in this.dataset) {
       if (`label` !== series) {
         let row = this.dataset[series];

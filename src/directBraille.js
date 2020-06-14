@@ -37,21 +37,3 @@ export function insertBrailleLines(node, lines) {
     }
     node.innerHTML = `<pre>${brailleLines}</pre>`;
 }
-
-export function insertInteractiveBrailleRegion(container, lines, eventListener) {
-    const region = document.createElement("div");
-    region.setAttribute("role", "textbox");
-    region.setAttribute("contenteditable", "true");
-    document.addEventListener("selectionchange", () => {
-      const selection = document.getSelection();
-      let offset = selection.anchorOffset;
-      eventListener(offset, region, selection);
-    });
-    insertBrailleLines(region, lines);
-
-    // clear container, and insert new braille string
-    while (container.firstChild) {
-      container.firstChild.remove();
-    }
-    container.appendChild(region);
-}
