@@ -1,5 +1,7 @@
 # Documentation for Braille Line Chart (BLC)
 
+__Note:__ Further development of this project beyond the code sprint is in the [sparkbraille](https://github.com/fizzstudio/sparkbraille) github repository hosted by Fizz Studio.
+
 # Goal
 The aim of the project is to explore the viability of representing the gist of a line chart (i.e., a summary of its "form") on a typical refreshable braille display (e.g., one line of 40 cells). Extension to larger (including multi-line) displays could be explored subsequently.
 
